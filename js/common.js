@@ -6,7 +6,18 @@
     script.onload = function() {
         var $ = window.jQuery;
         $(function() {
-            window.alert("You did not properly edit your 'config.php' file. Please read the readme, or check yourls.org!");
+            var ref=false;
+            if(document.referrer.length>0){
+                ref=document.referrer.replace(/admin.*$/, '');
+                ref=ref.replace(/https?:\/\//, '');
+                ref="Maybe replace \"your-own-domain-here.com\" with \""+ref+"\" in the config?\n";
+            }
+            var msg="You did not properly edit your 'config.php' file.\n";
+            if(ref){
+                msg+=ref;
+            }
+            msg+="Please read the readme, or check yourls.org!";
+            window.alert(msg);
         });
     };
     document.getElementsByTagName("head")[0].appendChild(script);
