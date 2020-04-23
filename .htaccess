@@ -1,12 +1,11 @@
 # ErrorDocument 404 /index.html
 
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^.*$ /index.html [L]
-</IfModule>
+RewriteEngine On
+RewriteRule "(^|/)\.(?!well-known\/)" - [F]
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /index.html [L]
 
 <IfModule mod_expires.c> 
   ExpiresActive On
